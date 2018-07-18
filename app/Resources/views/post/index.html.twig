@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Posts list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Subtitulo</th>
+                <th>Texto</th>
+                <th>Numeroaviso</th>
+                <th>Fechacreacion</th>
+                <th>Fechaactualizacion</th>
+                <th>Estado</th>
+                <th>Ubicacionmap</th>
+                <th>Precio</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td><a href="{{ path('post_show', { 'id': post.id }) }}">{{ post.id }}</a></td>
+                <td>{{ post.titulo }}</td>
+                <td>{{ post.subtitulo }}</td>
+                <td>{{ post.texto }}</td>
+                <td>{{ post.numeroAviso }}</td>
+                <td>{% if post.fechaCreacion %}{{ post.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if post.fechaActualizacion %}{{ post.fechaActualizacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if post.estado %}Yes{% else %}No{% endif %}</td>
+                <td>{{ post.ubicacionMap }}</td>
+                <td>{{ post.precio }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('post_show', { 'id': post.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('post_edit', { 'id': post.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('post_new') }}">Create a new post</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Perfilusuarios list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Profesion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for perfilUsuario in perfilUsuarios %}
+            <tr>
+                <td><a href="{{ path('admin_perfilUsuario_show', { 'id': perfilUsuario.id }) }}">{{ perfilUsuario.id }}</a></td>
+                <td>{{ perfilUsuario.nombre }}</td>
+                <td>{{ perfilUsuario.descripcion }}</td>
+                <td>{{ perfilUsuario.profesion }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_perfilUsuario_show', { 'id': perfilUsuario.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_perfilUsuario_edit', { 'id': perfilUsuario.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_perfilUsuario_new') }}">Create a new perfilUsuario</a>
+        </li>
+    </ul>
+{% endblock %}

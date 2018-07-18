@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div  class="page-header header-filter clear-filter purple-filter" data-parallax="true" style="background-image: url({{ asset('assets/img/bg2.jpg') }});">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto">
+                    <div class="brand">
+                        <h1>Material Kit.</h1>
+                        <h3>A Badass Bootstrap 4 UI Kit based on Material Design.</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main main-raised">
+        <div class="section section-basic">
+            <div class="container">
+                <div class="title text-center">
+                    <h2>Basic Elements</h2>
+                </div>
+                <div class="description">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                </div>
+                <br>
+                <div class="text-center">
+                    <a href="{{ path('noticias_index') }}" class="btn btn-primary text-white">Leer noticias</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

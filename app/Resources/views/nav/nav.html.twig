@@ -1,0 +1,88 @@
+<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+        <div class="navbar-translate">
+            <a class="navbar-brand" href="{{ path('homepage') }}">
+                Material Kit </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="material-icons">apps</i> Noticias
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="{{ path('noticias_index') }}" class="dropdown-item">
+                            <i class="material-icons">layers</i> Noticias
+                        </a>
+                        <a href="{{ path('post_new') }}" class="dropdown-item">
+                            <i class="material-icons">content_paste</i> Nueva noticia
+                        </a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('admin_perfilUsuario_new') }}">
+                        <i class="material-icons">account_circle</i> Perfil
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('fos_user_security_logout') }}">
+                        <i class="material-icons">keyboard_tab</i> Salir
+                    </a>
+                </li>
+                {% else %}
+                    <li class="dropdown nav-item">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <i class="material-icons">apps</i> Noticias
+                        </a>
+                        <div class="dropdown-menu dropdown-with-icons">
+                            <a href="{{ path('noticias_index') }}" class="dropdown-item">
+                                <i class="material-icons">layers</i> Noticias
+                            </a>
+                            <a href="{{ path('post_new') }}" class="dropdown-item">
+                                <i class="material-icons">content_paste</i> Nueva noticia
+                            </a>
+                        </div>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <i class="material-icons">apps</i> Usuario
+                        </a>
+                        <div class="dropdown-menu dropdown-with-icons">
+                            <a href="{{ path('fos_user_security_login') }}" class="dropdown-item">
+                                <i class="material-icons">layers</i> Login
+                            </a>
+                            <a href="{{ path('fos_user_registration_register') }}" class="dropdown-item">
+                                <i class="material-icons">content_paste</i> Register
+                            </a>
+                        </div>
+                    </li>
+                {% endif %}
+
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank" data-original-title="Follow us on Twitter">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank" data-original-title="Like us on Facebook">
+                        <i class="fa fa-facebook-square"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" data-original-title="Follow us on Instagram">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

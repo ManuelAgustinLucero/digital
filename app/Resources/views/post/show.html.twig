@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet"   href="{{ asset('assets/css/showPost.css') }}" />
+
+    {% endblock %}
+
+{% block body %}
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-2">
+            <a id="hijo" href="{{ path('post_show', { 'id': post.id+1 }) }}"><i class="nc-icon nc-minimal-left"></i></a>
+        </div>
+        <div class=" col-md-8 ">
+            <div class="card card-user card-stats">
+                <div class="image text-center col-md-12">
+                    <img src="../uploads/{{ post.imagenHeader }}" alt="{{ post.titulo }}">
+                </div>
+                <div class="card-body ">
+                    <div class="close">
+
+                    </div>
+                    <div class="row">
+                        <div class="col-5 col-md-3">
+                            <div class="icon-big text-center icon-warning">
+                               <i class="nc-icon {{ post.rubro.imgRubro }} text-warning"></i> <span class="text-gray">  {{ post.rubro }}</span>
+                                <br>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 ">
+                            <div class="">
+                                <h5 class=" card-title text-center">{{ post.titulo }}</h5>
+                                <p class="card-category">{{ post.subtitulo }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-12 col-md-12">
+                    <br>
+                    <p class="text-justify">{{ post.texto }}.
+                    <p>
+                    </div>
+                    </div>
+                </div>
+                <div class="card-footer ">
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="stats">
+                                <i class="fa fa-calendar"></i> {% if post.fechaCreacion %}{{ post.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="stats pull-right">
+                                <a href="{{ path('post_show', { 'id': post.id }) }}" class="btn btn-simple btn-link btn-primary">Comentar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <a  id="hijo" href="{{ path('post_show', { 'id': post.id-1 }) }}"><i class="nc-icon nc-minimal-right"></i></a>
+        </div>
+    </div>
+</div>
+    {#<h1>Post</h1>#}
+
+    {#<table>#}
+        {#<tbody>#}
+            {#<tr>#}
+                {#<th>Id</th>#}
+                {#<td>{{ post.id }}</td>#}
+            {#</tr>#}
+            {#<tr>#}
+                {#<th>Titulo</th>#}
+                {#<td>{{ post.titulo }}</td>#}
+            {#</tr>#}
+            {#<tr>#}
+                {#<th>Subtitulo</th>#}
+                {#<td>{{ post.subtitulo }}</td>#}
+            {#</tr>#}
+            {#<tr>#}
+                {#<th>Texto</th>#}
+                {#<td>{{ post.texto }}</td>#}
+            {#</tr>#}
+            {#<tr>#}
+                {#<th>Numeroaviso</th>#}
+                {#<td>{{ post.numeroAviso }}</td>#}
+            {#</tr>#}
+            {#<tr>#}
+                {#<th>Fechacreacion</th>#}
+                {#<td>{% if post.fechaCreacion %}{{ post.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>#}
+            {#</tr>#}
+            {#<tr>#}
+                {#<th>Fechaactualizacion</th>#}
+                {#<td>{% if post.fechaActualizacion %}{{ post.fechaActualizacion|date('Y-m-d H:i:s') }}{% endif %}</td>#}
+            {#</tr>#}
+            {#<tr>#}
+                {#<th>Estado</th>#}
+                {#<td>{% if post.estado %}Yes{% else %}No{% endif %}</td>#}
+            {#</tr>#}
+            {#<tr>#}
+                {#<th>Ubicacionmap</th>#}
+                {#<td>{{ post.ubicacionMap }}</td>#}
+            {#</tr>#}
+            {#<tr>#}
+                {#<th>Precio</th>#}
+                {#<td>{{ post.precio }}</td>#}
+            {#</tr>#}
+        {#</tbody>#}
+    {#</table>#}
+
+    {#<ul>#}
+        {#<li>#}
+            {#<a href="{{ path('post_index') }}">Back to the list</a>#}
+        {#</li>#}
+        {#<li>#}
+            {#<a href="{{ path('post_edit', { 'id': post.id }) }}">Edit</a>#}
+        {#</li>#}
+        {#<li>#}
+            {#{{ form_start(delete_form) }}#}
+                {#<input type="submit" value="Delete">#}
+            {#{{ form_end(delete_form) }}#}
+        {#</li>#}
+    {#</ul>#}
+{% endblock %}

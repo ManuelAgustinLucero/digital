@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% include "@FOSUser/Registration/register_content.html.twig" %}
+{% endblock body %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $( "#body" ).removeClass( "index-page" ).addClass( "login-page" );
+
+    </script>
+{% endblock %}

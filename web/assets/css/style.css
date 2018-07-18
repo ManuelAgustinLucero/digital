@@ -1,0 +1,8 @@
+.index-page .page-header{
+    height: 50vh !important;
+    overflow: hidden;
+}
+
+.close{
+    margin-right:10px; !important;
+}

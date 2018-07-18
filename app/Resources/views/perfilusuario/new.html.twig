@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+
+
+    <div id="imgSalidaHeader"  class="page-header header-filter" data-parallax="true" style="background-image: url({{ asset('/assets/img/city-profile.jpg') }});">
+    </div>
+    <div class="main main-raised">
+        <div class="profile-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 ml-auto mr-auto">
+                        <div class="profile">
+                            <div class="avatar">
+                                <img id="imgSalidaAvatar" src="{{ asset("../assets/img/faces/christian.jpg") }}" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                            </div>
+                            <div class="name">
+                                <h3 class="title">{{ form_widget(form.nombre, { 'attr': {'class':'form-control border-input text-center','placeholder':'Nombre'}})}}</h3>
+                                <h6>{{ form_widget(form.profesion, { 'attr': {'class':'form-control border-input text-center','placeholder':'Profesion'}})}}</h6>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="description ">
+                    <div class="form-group ">
+                        <label for="exampleMessage " class="bmd-label-floating text-center" >Descripcion</label>
+
+                        {{ form_widget(form.descripcion) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 ml-auto mr-auto">
+                        <div>
+                            <h6 class="text-center">Carga de imagen Avatar y fono</h6>
+                        </div>
+                        <div class="name">
+                            {{ form_widget(form.imagenAvatar, { 'attr': {'class':'form-control text-center '}}) }}
+                            {{ form_widget(form.imagenHeader, { 'attr': {'class':'form-control  text-center'}}) }}
+                            <div class="hiden" style="display: none">
+                                {{ form_widget(form.user) }}
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="tab-content tab-space text-center">
+                    <input class="btn btn-primary " type="submit" value="Crear" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}
+{% block javascripts %}
+  {{ parent() }}
+
+    <script>
+        $( "#body" ).removeClass( "index-page" ).addClass( "profile-page" );
+
+        $(function() {
+            $('#appbundle_perfilusuario_imagenAvatar').change(function(e) {
+                addImage(e);
+            });
+
+            function addImage(e){
+                var file = e.target.files[0],
+                    imageType = /image.*/;
+
+                if (!file.type.match(imageType))
+                    return;
+
+                var reader = new FileReader();
+                reader.onload = fileOnload;
+                reader.readAsDataURL(file);
+            }
+
+            function fileOnload(e) {
+                var result=e.target.result;
+                $('#imgSalidaAvatar').attr("src",result);
+            }
+        });
+        $(function() {
+            $('#appbundle_perfilusuario_imagenHeader').change(function(e) {
+                addImage(e);
+            });
+            function addImage(e){
+                var file = e.target.files[0],
+                    imageType = /image.*/;
+
+                if (!file.type.match(imageType))
+                    return;
+
+                var reader = new FileReader();
+                reader.onload = fileOnload;
+                reader.readAsDataURL(file);
+            }
+
+            function fileOnload(e) {
+                var result=e.target.result;
+                $('#imgSalidaHeader').css('background-image', 'url(' + result + ')');
+
+            }
+        });
+    </script>
+{% endblock %}

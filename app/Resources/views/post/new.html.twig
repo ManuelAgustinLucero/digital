@@ -1,0 +1,591 @@
+{% extends 'base.html.twig' %}
+  {% block stylesheets %}
+      {{ parent() }}
+      <link rel="stylesheet"   href="{{ asset('assets/css/style.css') }}" />
+
+      <link rel="stylesheet"   href="{{ asset('assets/cards/css/hipster_cards.css') }}" />
+      <link rel="stylesheet"   href="{{ asset('assets/cards/css/pe-icon-7-stroke.css') }}" />
+      <style>
+          .card{
+              margin-bottom: 70px;
+          }
+      </style>
+  {% endblock %}
+{% block body %}
+    <div id="maschico"  class="page-header header-filter clear-filter purple-filter" data-parallax="true" style="background-image: url({{ asset('assets/img/bg2.jpg') }});">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto">
+                    <div class="brand">
+                        <h1>Nueva Noticias</h1>
+                        <h3>Selecciona tu plantilla y agrega contenido.</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main main-raised">
+        <div class="section section-basic">
+            <div class="container">
+
+
+                <div  class="col-md-12">
+                    <div class="">
+                        <div class="container">
+                            <div class="masonry-container">
+                                <div class="card-box col-md-6 col-sm-6">
+                                    {{ form_start(form) }}
+
+                                    <div class="card-body ">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="">Seleccione Rubro</label>
+                                                {{ form_widget(form.rubro, { 'attr': {'class':'form-control border-input','placeholder': 'Texto'}}) }}
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="">Seleccione miniatura</label>
+                                                {{ form_widget(form.caard, { 'attr': {'class':'form-control border-input','placeholder': 'Texto'}}) }}
+                                            </div>
+
+                                        </div>
+                                        <div style="display: none" id="inputs">
+                                            <br>
+                                            <div class="row" >
+                                                <div class="col-md-6">
+                                                    {{ form_widget(form.imagenHeader, { 'attr': {'class':'form-control border-input','placeholder': 'Texto'}}) }}
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-12 col-md-12 ">
+                                                    <div class="">
+                                                        <h5 class=" card-title text-center">{{ form_widget(form.titulo, { 'attr': {'class':'form-control border-input','placeholder': 'Titulo'}}) }}</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                 <div class="col-md-12 col-12">
+                                                     <p class="card-category">{{ form_widget(form.subtitulo, { 'attr': {'class':'form-control border-input','placeholder': 'Subtitulo'}}) }}</p>
+
+                                                 </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-md-12">
+                                                    <br>
+                                                    <p class="text-justify">{{ form_widget(form.texto, { 'attr': {'class':'form-control border-input','placeholder': 'Texto'}}) }}
+                                                    <p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-md-12">
+                                                    <br>
+                                                    <p class="text-justify">{{ form_widget(form.precio, { 'attr': {'class':'form-control border-input','placeholder': 'Precio'}}) }}
+                                                    <p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="stats ">
+                                                <div class="col-12 col-md-12">
+                                                    <input  class="btn   btn-primary text-cente" type="submit" value="Crear" />
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="" style="display: none">
+                                            {{ form_widget(form.fechaCreacion) }}
+                                            {{ form_widget(form.fechaActualizacion) }}
+                                            {{ form_widget(form.user) }}
+                                            {{ form_widget(form.estado) }}
+                                            {{ form_widget(form.numeroAviso) }}
+                                        </div>
+                                        <div style="display: none">
+                                            {{ form_widget(form.ubicacionMap) }}
+
+                                        </div>
+                                        {{ form_end(form) }}
+                                        <div class="col-md-6">
+                                            <div class="stats">
+                                                <div class="col-12 col-md-12">
+                                                    <a class="btn  btn-link btn-primary text-center" onclick="CargarTextos()"> Previsualizacion</a>
+                                                </div>
+                                                {#<i class="fa fa-calendar"></i> {{ "now"|date("m/d/Y") }}#}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+
+                                </div>
+
+                                {#FIN DE EL FORM#}
+                                <div id="miniatura"  >
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3"  style="display: none" id="article">
+                                        <div class="card card-with-border card-just-text" data-background="color" data-color="black" >
+                                            <div class="content">
+                                                <h4 class="title">"In the end we only <b>regret</b> the chances we didn't take."</h4>
+                                                <p class="description">- Hipster Quote</p>
+                                            </div>
+                                        </div> <!-- end card -->
+                                    </div>
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3" id="1" style="display: none">
+                                        <div class="card">
+                                            <div class="header changeBackground"  id="imgSalidaAvatar"  >
+                                                <img  src="{{ asset('assets/cards/img/lifestyle-8.jpg') }}"/>
+
+                                                <div class="filter"></div>
+
+                                                <div class="actions">
+                                                    <button class="btn btn-round btn-fill btn-neutral btn-modern">
+                                                        Leer Más
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="content">
+                                                <h6 class="category">Nuevo</h6>
+                                                <h4 class="title titulo"><a > <span > Titulo</span> </a></h4>
+                                                <p class="description texto"> <span > Sub Titulo</span></p>
+                                            </div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3"  style="display: none" id="9">
+                                        <div id="imgSalidaAvatar"  class="card changeBackground" data-background="image" data-src="{{ asset('assets/cards/img/lifestyle-1.jpg') }}">
+                                            <div class="header">
+                                                <div class="category">
+                                                    <h6 class="label label-danger">Solicitud trabajo</h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="content">
+                                                <h4 class="title title-uppercase titulo">
+                                                    <a > <span >Here can be your special title for this card</span></a>
+                                                </h4>
+                                                <p class="description texto" >When selling products it's always a good idea to go with commanding fonts that are good at showing authority and security. I feel like Raleway and Roboto do just that.</p>
+                                            </div>
+                                            <div class="filter">
+
+                                            </div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3" style="display: none" id="6">
+                                        <div class="card">
+                                            <div class="content">
+                                                <h6 class="category">Best stories</h6>
+                                                <h4 class="title"><a href="#">This is a plain Hipster Card, see for yourself</a></h4>
+                                                <p class="description">When selling products it's always a good idea to go with commanding fonts that are good at showing authority and security. I feel like Raleway and Roboto do just that.</p>
+                                            </div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3" style="display: none" id="2">
+                                        <div class="card">
+                                            <div class="header changeBackground" id="imgSalidaAvatar" >
+                                                <img src="{{ asset('assets/cards/img/beard-1.jpg') }}" />
+
+                                                <div class="social-line social-line-visible" data-buttons="4">
+                                                    <button class="btn btn-social btn-facebook">
+                                                        <i class="fa fa-facebook"></i>
+                                                    </button>
+                                                    <button class="btn btn-social btn-twitter">
+                                                        <i class="fa fa-twitter"></i>
+                                                    </button>
+                                                    <button class="btn btn-social btn-pinterest">
+                                                        <i class="fa fa-pinterest"></i>
+                                                    </button>
+                                                    <button class="btn btn-social btn-google">
+                                                        <i class="fa fa-google-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="content">
+                                                <h6 class="category">Nuevo</h6>
+                                                <h4 class="title titulo" >Titulo</h4>
+                                                <p class="description texto" >Subtitulo</p>
+                                            </div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3"  style="display: none" id="10">
+                                        <div class="card changeBackground" data-background="image" data-src="{{ asset('assets/cards/img/lifestyle-2.jpg') }}">
+                                            <div class="header">
+                                                <div class="category">
+                                                    <h6 class="label label-warning">Solicitud de trabajador</h6>
+                                                </div>
+
+                                                <div class="social-line" data-buttons="3">
+                                                    <button class="btn btn-social btn-facebook">
+                                                        <i class="fa fa-facebook-square"></i> Share
+                                                    </button>
+                                                    <button class="btn btn-social btn-twitter">
+                                                        <i class="fa fa-twitter"></i> Tweet
+                                                    </button>
+                                                    {#<button class="btn btn-social btn-pinterest">#}
+                                                        {#<i class="fa fa-pinterest"></i> Pin#}
+                                                    {#</button>#}
+                                                </div>
+                                            </div>
+
+                                            <div class="content ">
+                                                <h4 class="title titulo" >Titulo.</h4>
+                                                <p class="description texto">Subtitulo</p>
+                                            </div>
+                                            <div class="filter"></div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+
+
+
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3"  style="display: none" id="4">
+                                        <div class="card card-with-border changeBackground" data-background="image" data-src="{{ asset('assets/cards/img/fashion-1.jpg') }}">
+                                            <div class="header">
+                                            </div>
+
+                                            <div class="content text-center">
+                                                <p class="description">Titulo</p>
+                                            </div>
+                                            <div class="footer text-center">
+                                                <a href="#" class="btn btn-danger btn-fill btn-round">Leer articulo</a>
+                                            </div>
+                                            <div class="filter"></div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3"  style="display: none">
+                                        <div class="card card-just-text card-with-border changeBackground" data-background="image" data-src="{{ asset('assets/cards/img/lifestyle-9.jpg') }}">
+                                            <div class="content">
+                                                <h4 class="title title-modern">"I liked nutella, triangles and outerspace way before hipsters."</h4>
+                                                <p class="description">- Not A Hipster</p>
+                                            </div>
+                                            <div class="filter"></div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3"  style="display: none">
+                                        <div class="card card-with-border" data-background="color" data-color="azure">
+                                            <div class="header">
+                                                <div class="icon">
+                                                    <i class="pe-7s-radio"></i>
+                                                </div>
+                                            </div>
+                                            <div class="content text-center">
+                                                <h4 class="title title-modern titulo">Nicecream.fm</h4>
+                                                <p class="description texto">Best vibes in the marketplace. Listen to the best music from '89. I feel like Nicecream and .fm do just that.</p>
+                                            </div>
+                                            <div class="footer text-center">
+                                                <button class="btn btn-neutral btn-round btn-fill btn-modern">Listen Now!</button>
+                                            </div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+
+
+
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3"  style="display: none" id="5">
+                                        <div class="card card-with-border" data-background="color" data-color="orange">
+                                            <div class="content">
+                                                <h6 class="category">Nuevo Articulo</h6>
+                                                <h4 class="title titulo">
+                                                    <a> Titulo</a>
+                                                </h4>
+                                                <p class="description texto">Descripcion.</p>
+                                            </div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3"  style="display: none" id="7">
+                                        <div class="card text-center changeBackground" data-background="image" data-src="{{ asset('assets/cards/img/auto.jpg') }}">
+                                            <h4 class="title title-modern">Titulo</h4>
+
+                                            <div class="content">
+                                                <div class="price">
+                                                    <h6>Desde</h6>
+                                                    <h4 >$ <span class="precioSelect">0.0</span></h4>
+                                                </div>
+                                                <p class="description">SubTitulo</p>
+                                            </div>
+                                            <div class="filter"></div>
+                                            <div class="footer btn-center">
+                                                <button class="btn btn-neutral btn-round btn-fill">Comprar!</button>
+                                            </div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+
+
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3"  style="display: none" id="ventaNormal">
+                                        <div class="card card-with-border">
+                                            <div class="header">
+                                                <div class="icon">
+                                                    <i class="pe-7s-glasses"></i>
+                                                </div>
+                                            </div>
+                                            <div class="content text-center">
+                                                <h4 class="title text-center titulo">Hipster Glasses App</h4>
+                                                <p class="description texto">Here can be a description about the application that is for download. I feel like this app is what I need.</p>
+                                            </div>
+                                            <div class="footer btn-center">
+                                                <button class="btn btn-default btn-round btn-fill btn-info btn-modern">Download</button>
+                                            </div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+
+
+
+
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3"  style="display: none">
+                                        <div class="card card-just-text card-with-border changeBackground" data-background="image" data-src="{{ asset('assets/cards/img/music-3.jpg') }}">
+                                            <div class="content">
+                                                <div class="filter filter-red"></div>
+                                                <h4 class="title title-modern">"I like the way you work it
+                                                    No diggity, I gotta bag it up."</h4>
+                                                <p class="description">- Chet Faker</p>
+                                            </div>
+
+                                            <div class="filter"></div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3"  style="display: none">
+                                        <div class="card card-with-border" data-background="color" data-color="green">
+                                            <div class="header">
+                                                <div class="icon">
+                                                    <i class="pe-7s-gift"></i>
+                                                </div>
+
+                                                <div class="social-line" data-buttons="3">
+                                                    <button class="btn btn-social btn-facebook">
+                                                        <i class="fa fa-facebook"></i>
+                                                    </button>
+                                                    <button class="btn btn-social btn-twitter">
+                                                        <i class="fa fa-twitter"></i>
+                                                    </button>
+                                                    <button class="btn btn-social btn-pinterest">
+                                                        <i class="fa fa-pinterest"></i>
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                            <div class="content text-center">
+                                                <p class="description">Your friend <b>Michael Osborn</b> has sent you a hipster gift card.</p><br>
+                                            </div>
+                                            <div class="footer btn-center">
+                                                <button class="btn btn-neutral btn-fill btn-modern">View Gift Details</button>
+                                            </div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3"  style="display: none" id="3">
+                                        <div class="card" data-background="color" data-color="black">
+                                            <div class="header changeBackground" id="imgSalidaAvatar" >
+                                                <img src="{{ asset('assets/cards/img/home-1.jpg') }}"/>
+
+                                                <div class="social-line" data-buttons="2">
+                                                    <button class="btn btn-social">
+                                                        <i class="fa fa-facebook-square"></i> Share
+                                                    </button>
+                                                    <button class="btn btn-social">
+                                                        <i class="fa fa-twitter"></i> Tweet
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="content">
+                                                <h6 class="category">Nuevo diseño</h6>
+                                                <h4 class="title titulo"><a > <span id="">Titulo  </span> </a></h4>
+                                                <p class="description texto" id="">SubTitulo</p>
+                                            </div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-3" style="display: none" id="8">
+                                        <div class="card text-center changeBackground" data-background="image" data-src="{{ asset('assets/cards/img/city-1.jpg') }}">
+                                            <h4 class="title title-modern">Titulo</h4>
+
+                                            <div class="content">
+                                                <div class="price">
+                                                    <h6>Desde</h6>
+                                                    <h4>$ <span class="precioSelect">0.0</span></h4>
+                                                </div>
+                                            </div>
+
+                                            <div class="footer btn-center">
+                                                <button class="btn btn-neutral btn-round btn-modern">Comprar</button>
+                                            </div>
+
+                                            <div class="filter filter-blue"></div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+                                    <div class="card-box col-md-4 col-sm-6 hiden offset-2 "  id="default">
+                                        <div class="card" data-background="color" data-color="trasparent">
+                                            <div class="header">
+                                                {#<img src="{{ asset('assets/cards/img/home-1.jpg') }}"/>#}
+
+                                            </div>
+
+                                            <div class="content">
+                                                <h6 class="category">Interior Design</h6>
+                                                <h4 class="title"><a href="#">Hipster Apartment sold for $1.2 mil.</a></h4>
+                                                <p class="description">When selling products it's always a good idea to go with commanding fonts that are good at showing authority and security. I feel like Raleway and Roboto do just that.</p>
+                                            </div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div> <!-- end wrapper -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+  {% block javascripts %}
+      {{ parent() }}
+      <script src="{{ asset('assets/cards/js/bootstrap.min.js') }}" ></script>
+      <script src="{{ asset('assets//cards/js/hipster-cards.js') }}" ></script>
+      <!--  Just for demo	 -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.min.js"></script>
+
+      <script>
+
+          $().ready(function(){
+
+              var $container = $('.masonry-container');
+
+              doc_width = $(document).width();
+
+              if (doc_width >= 768){
+                  $container.masonry({
+                      itemSelector        : '.card-box',
+                      columnWidth         : '.card-box',
+                      transitionDuration  : 0
+                  });
+              } else {
+                  $('.mas-container').removeClass('mas-container').addClass('row');
+              }
+          });
+      </script>
+      <script>
+          var block=1;
+          var idSelect;
+          $(function() {
+              $('#appbundle_post_imagenHeader').change(function(e) {
+                  addImage(e);
+
+              });
+
+              function addImage(e){
+                  var file = e.target.files[0],
+                      imageType = /image.*/;
+
+                  if (!file.type.match(imageType))
+                      return;
+
+                  var reader = new FileReader();
+                  reader.onload = fileOnload;
+                  reader.readAsDataURL(file);
+              }
+
+              function fileOnload(e) {
+                  var result=e.target.result;
+                      // $('.header').css('background-image', 'url(' + result + ')');
+                  $('.changeBackground').css('background-image', 'url(' + result + ')');
+
+
+
+              }
+          });
+
+
+          $("#appbundle_post_precio").hide();
+
+          document.getElementById("appbundle_post_caard").onchange = function(e) {
+               idSelect=e.target.value;
+              $(".hiden").hide();
+              $("#"+idSelect).show();
+
+              if (block=1){
+                  $("#inputs").show();
+                  block=2;
+              }
+              if (idSelect==7  || idSelect==8){
+                  $("#appbundle_post_precio").show();
+              }else{
+                  $("#appbundle_post_precio").hide();
+              }
+
+          };
+          function CargarTextos() {
+              var titulo=$("#appbundle_post_titulo").val();
+              var subtitulo=$("#appbundle_post_subtitulo").val();
+              var precio=$("#appbundle_post_precio").val();
+
+              console.log(titulo,subtitulo);
+              $(".titulo").empty();
+              $(".texto").empty();
+              $(".precioSelect").empty();
+
+              $(".titulo").text(titulo);
+              $(".texto").text(subtitulo);
+              $(".precioSelect").text(precio);
+
+          }
+
+          // document.getElementById("appbundle_post_titulo").onchange = function(e) {
+          //     console.log(e.target.value);
+          //
+          //
+          // };
+          // document.getElementById("appbundle_post_subtitulo").onchange = function(e) {
+          //     console.log(e.target.value);
+          //
+          //
+          // };
+      </script>
+
+
+
+  {% endblock %}
